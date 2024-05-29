@@ -39,13 +39,13 @@
                 "tag": "IP->Iran, Yotube:Geekmeek",
                 "local_address": [
                         "172.16.0.2/32",
-                        "2606:4700:110:89be:5785:dcce:52c7:93dc/128"
+                        "2606:4700:110:8fbe:7a2f:25eb:ea87:fd0e/128"
                 ],
-                "private_key": "OJp7I34hZdudyrmHp0D/MjC7cn6aSHxdZl2v28i+amE=",
-                "server": "162.159.195.202",
-                "server_port": 946,
+                "private_key": "0Dlk7Ki6ybvaiobzrYJYJ/cBeBVoLpJ7qZT7JXRxv14=",
+                "server": "162.159.192.41",
+                "server_port": 4233,
                 "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                "reserved": [71,181,40],
+                "reserved": [84,228,45],
                 "mtu": 1280,
                 "fake_packets": "5-10"
                 },
@@ -55,13 +55,13 @@
                 "detour": "IP->Iran, Yotube:Geekmeek",
                 "local_address": [
                         "172.16.0.2/32",
-                        "2606:4700:110:885f:b63:2caa:fd69:2ec1/128"
+                        "2606:4700:110:8c81:f67c:7b80:cffa:8a59/128"
                 ],
-                "private_key": "YEs5+Nc/M4Y6cgW4OReGvmiFibY9qGtrr1JCmntizUw=",
-                "server": "162.159.195.202",
-                "server_port": 946,
+                "private_key": "GARnnweoYg8F50QQHYnY3p0LfB1JomBDMocoODh92k4=",
+                "server": "162.159.192.41",
+                "server_port": 4233,
                 "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-                "reserved": [48,54,75],
+                "reserved": [242,168,16],
                 "mtu": 1280,
                 "fake_packets": "5-10"
                 },
@@ -83,4 +83,3 @@
                 }
         ]
         }
-
