@@ -1,0 +1,407 @@
+{
+  "log": {
+    "level": "warn",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "udp://1.1.1.1",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "1.1.1.1",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "www.speedtest.net",
+          "edb9e66a.bpb-worker-panel-bnj.pages.dev"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "domain": "cp.cloudflare.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "104.17.147.22",
+        "104.17.148.22"
+      ]
+    },
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 9000,
+      "inet4_address": "172.19.0.1/28",
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "mixed",
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 2334,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 6450
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "💦 BPB - Domain_1 : 443 § 0",
+        "💦 BPB - Domain_2 : 443 § 1",
+        "💦 BPB - IPv4_1 : 443 § 2",
+        "💦 BPB - IPv4_2 : 443 § 3",
+        "💦 BPB - IPv6_1 : 443 § 4",
+        "💦 BPB - IPv6_2 : 443 § 5",
+        "💦 BPB - Clean IP_1 : 443 § 6"
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "💦 BPB - Domain_1 : 443 § 0",
+        "💦 BPB - Domain_2 : 443 § 1",
+        "💦 BPB - IPv4_1 : 443 § 2",
+        "💦 BPB - IPv4_2 : 443 § 3",
+        "💦 BPB - IPv6_1 : 443 § 4",
+        "💦 BPB - IPv6_2 : 443 § 5",
+        "💦 BPB - Clean IP_1 : 443 § 6"
+      ],
+      "url": "http://connectivitycheck.gstatic.com/generate_204",
+      "interval": "10m0s",
+      "idle_timeout": "1h40m0s"
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - Domain_1 : 443 § 0",
+      "server": "edb9e66a.bpb-worker-panel-bnj.pages.dev",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "edb9e66A.BPb-wORkEr-PAneL-Bnj.PAGes.DEv",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/OnhJwWOJpQK8e4bq",
+        "headers": {
+          "Host": "edB9E66A.BPb-worKeR-PAnEL-BNJ.PAGes.deV"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - Domain_2 : 443 § 1",
+      "server": "www.speedtest.net",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "eDB9E66a.BpB-WORker-PaneL-BNj.PAGES.DEV",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/1KcjFTVhF8KdIoM0",
+        "headers": {
+          "Host": "EDb9E66a.BPb-wORKER-PANEL-bNJ.pagES.dEV"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - IPv4_1 : 443 § 2",
+      "server": "172.66.44.86",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "edb9e66A.bpB-wOrker-pAnEl-bNJ.PAGeS.DeV",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/h5A4k7FEfI1nSuI0",
+        "headers": {
+          "Host": "eDB9E66A.BpB-wORkeR-PANeL-bNj.pAGEs.Dev"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - IPv4_2 : 443 § 3",
+      "server": "172.66.47.170",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "eDb9E66a.Bpb-WorKEr-PAnel-Bnj.PAgeS.DeV",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/3wmPXzVfLYocX1K3",
+        "headers": {
+          "Host": "eDB9E66a.BPb-workER-PaNel-Bnj.paGEs.DEv"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - IPv6_1 : 443 § 4",
+      "server": "2606:4700:310c::ac42:2faa",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "edB9e66a.bpB-WORKER-PaNEL-BNJ.PAGES.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/eWsvj8x5xFwFdiAL",
+        "headers": {
+          "Host": "EDB9e66a.bpB-wOrkeR-pANEL-bNJ.PAgeS.Dev"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - IPv6_2 : 443 § 5",
+      "server": "2606:4700:310c::ac42:2c56",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "eDB9e66A.BpB-workeR-PAneL-bNJ.pAgeS.dEv",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/04JX3vKcF8PD7cHs",
+        "headers": {
+          "Host": "EDB9e66A.BpB-WoRKer-pANEL-BnJ.PAGES.dEV"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "vless",
+      "tag": "💦 BPB - Clean IP_1 : 443 § 6",
+      "server": "104.17.203.0",
+      "server_port": 443,
+      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
+      "tls": {
+        "enabled": true,
+        "server_name": "eDB9e66a.bPb-WOrKer-PANeL-BNj.PageS.dev",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "randomized"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/IydEC4UDB9CRSvDh",
+        "headers": {
+          "Host": "EdB9e66a.BPB-wORkER-paNEL-BNj.pAgEs.dEV"
+        },
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": ""
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "1-500",
+        "sleep": "0-500"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "rule_set": [
+          "geosite-ads",
+          "geosite-malware",
+          "geosite-phishing",
+          "geosite-cryptominers",
+          "geoip-malware",
+          "geoip-phishing"
+        ],
+        "outbound": "block"
+      },
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "select"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geosite-ads",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-category-ads-all.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-malware",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-malware.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-phishing",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-phishing.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-cryptominers",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-cryptominers.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-phishing",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-phishing.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-malware",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-malware.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "clash.db"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:6756",
+      "secret": "J_FJEj_BtddEdYjl"
+    }
+  }
+}
