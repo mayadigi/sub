@@ -34,10 +34,8 @@
     ],
     "rules": [
       {
-        "domain": [
-          "www.speedtest.net",
-          "edb9e66a.bpb-worker-panel-bnj.pages.dev"
-        ],
+        "domain_suffix": ".ir",
+        "geosite": "ir",
         "server": "dns-direct"
       },
       {
@@ -49,8 +47,16 @@
     "final": "dns-remote",
     "static_ips": {
       "sky.rethinkdns.com": [
-        "104.17.147.22",
-        "104.17.148.22"
+        "188.114.96.3",
+        "188.114.97.3",
+        "2a06:98c1:3121::3",
+        "2a06:98c1:3120::3",
+        "104.18.202.232",
+        "104.18.203.232",
+        "188.114.96.3",
+        "188.114.97.3",
+        "2a06:98c1:3120::3",
+        "2a06:98c1:3121::3"
       ]
     },
     "independent_cache": true
@@ -80,7 +86,9 @@
       "type": "direct",
       "tag": "dns-in",
       "listen": "127.0.0.1",
-      "listen_port": 6450
+      "listen_port": 6450,
+      "override_address": "1.1.1.1",
+      "override_port": 53
     }
   ],
   "outbounds": [
@@ -89,13 +97,8 @@
       "tag": "select",
       "outbounds": [
         "auto",
-        "💦 BPB - Domain_1 : 443 § 0",
-        "💦 BPB - Domain_2 : 443 § 1",
-        "💦 BPB - IPv4_1 : 443 § 2",
-        "💦 BPB - IPv4_2 : 443 § 3",
-        "💦 BPB - IPv6_1 : 443 § 4",
-        "💦 BPB - IPv6_2 : 443 § 5",
-        "💦 BPB - Clean IP_1 : 443 § 6"
+        "IP-\u003eIran, Yotube:SABA",
+        "IP-\u003eMain, Yotube:SABA"
       ],
       "default": "auto"
     },
@@ -103,192 +106,43 @@
       "type": "urltest",
       "tag": "auto",
       "outbounds": [
-        "💦 BPB - Domain_1 : 443 § 0",
-        "💦 BPB - Domain_2 : 443 § 1",
-        "💦 BPB - IPv4_1 : 443 § 2",
-        "💦 BPB - IPv4_2 : 443 § 3",
-        "💦 BPB - IPv6_1 : 443 § 4",
-        "💦 BPB - IPv6_2 : 443 § 5",
-        "💦 BPB - Clean IP_1 : 443 § 6"
+        "IP-\u003eIran, Yotube:SABA",
+        "IP-\u003eMain, Yotube:SABA"
       ],
-      "url": "http://connectivitycheck.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/",
       "interval": "10m0s",
       "idle_timeout": "1h40m0s"
     },
     {
-      "type": "vless",
-      "tag": "💦 BPB - Domain_1 : 443 § 0",
-      "server": "edb9e66a.bpb-worker-panel-bnj.pages.dev",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "edb9e66A.BPb-wORkEr-PAneL-Bnj.PAGes.DEv",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/OnhJwWOJpQK8e4bq",
-        "headers": {
-          "Host": "edB9E66A.BPb-worKeR-PAnEL-BNJ.PAGes.deV"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
+      "type": "wireguard",
+      "tag": "IP-\u003eIran, Yotube:SABA",
+      "local_address": [
+        "172.16.0.2/32",
+        "2606:4700:110:8b66:b6e8:8139:73a2:b735/128"
+      ],
+      "private_key": "CL84olI2Gjax8Pu2wgoeLyHVmGsQ4vippTG02WCMsWs=",
+      "server": "188.114.97.136",
+      "server_port": 878,
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved": "qBxx",
+      "mtu": 1280,
+      "fake_packets": "5-10"
     },
     {
-      "type": "vless",
-      "tag": "💦 BPB - Domain_2 : 443 § 1",
-      "server": "www.speedtest.net",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "eDB9E66a.BpB-WORker-PaneL-BNj.PAGES.DEV",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/1KcjFTVhF8KdIoM0",
-        "headers": {
-          "Host": "EDb9E66a.BPb-wORKER-PANEL-bNJ.pagES.dEV"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
-    },
-    {
-      "type": "vless",
-      "tag": "💦 BPB - IPv4_1 : 443 § 2",
-      "server": "172.66.44.86",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "edb9e66A.bpB-wOrker-pAnEl-bNJ.PAGeS.DeV",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/h5A4k7FEfI1nSuI0",
-        "headers": {
-          "Host": "eDB9E66A.BpB-wORkeR-PANeL-bNj.pAGEs.Dev"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
-    },
-    {
-      "type": "vless",
-      "tag": "💦 BPB - IPv4_2 : 443 § 3",
-      "server": "172.66.47.170",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "eDb9E66a.Bpb-WorKEr-PAnel-Bnj.PAgeS.DeV",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/3wmPXzVfLYocX1K3",
-        "headers": {
-          "Host": "eDB9E66a.BPb-workER-PaNel-Bnj.paGEs.DEv"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
-    },
-    {
-      "type": "vless",
-      "tag": "💦 BPB - IPv6_1 : 443 § 4",
-      "server": "2606:4700:310c::ac42:2faa",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "edB9e66a.bpB-WORKER-PaNEL-BNJ.PAGES.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eWsvj8x5xFwFdiAL",
-        "headers": {
-          "Host": "EDB9e66a.bpB-wOrkeR-pANEL-bNJ.PAgeS.Dev"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
-    },
-    {
-      "type": "vless",
-      "tag": "💦 BPB - IPv6_2 : 443 § 5",
-      "server": "2606:4700:310c::ac42:2c56",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "eDB9e66A.BpB-workeR-PAneL-bNJ.pAgeS.dEv",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/04JX3vKcF8PD7cHs",
-        "headers": {
-          "Host": "EDB9e66A.BpB-WoRKer-pANEL-BnJ.PAGES.dEV"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
-    },
-    {
-      "type": "vless",
-      "tag": "💦 BPB - Clean IP_1 : 443 § 6",
-      "server": "104.17.203.0",
-      "server_port": 443,
-      "uuid": "89b3cbba-e6ac-485a-9481-976a0415eab9",
-      "tls": {
-        "enabled": true,
-        "server_name": "eDB9e66a.bPb-WOrKer-PANeL-BNj.PageS.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "randomized"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/IydEC4UDB9CRSvDh",
-        "headers": {
-          "Host": "EdB9e66a.BPB-wORkER-paNEL-BNj.pAgEs.dEV"
-        },
-        "max_early_data": 2560,
-        "early_data_header_name": "Sec-WebSocket-Protocol"
-      },
-      "packet_encoding": ""
+      "type": "wireguard",
+      "tag": "IP-\u003eMain, Yotube:SABA",
+      "detour": "IP-\u003eIran, Yotube:SABA",
+      "local_address": [
+        "172.16.0.2/32",
+        "2606:4700:110:8bba:4ffb:56ad:ee01:1c3a/128"
+      ],
+      "private_key": "WFtKghAcrp3npD1BD4g66oyqwFvn6d45BrjfOQpL6V8=",
+      "server": "188.114.97.136",
+      "server_port": 878,
+      "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+      "reserved": "gEaX",
+      "mtu": 1280,
+      "fake_packets": "5-10"
     },
     {
       "type": "dns",
@@ -306,7 +160,7 @@
         "size": "1-500",
         "sleep": "0-500"
       }
-    },
+},
     {
       "type": "direct",
       "tag": "bypass"
@@ -317,18 +171,13 @@
     }
   ],
   "route": {
+    "geoip": {
+      "path": "geo-assets/chocolate4u-iran-sing-box-rules-geoip.db"
+    },
+    "geosite": {
+      "path": "geo-assets/chocolate4u-iran-sing-box-rules-geosite.db"
+    },
     "rules": [
-      {
-        "rule_set": [
-          "geosite-ads",
-          "geosite-malware",
-          "geosite-phishing",
-          "geosite-cryptominers",
-          "geoip-malware",
-          "geoip-phishing"
-        ],
-        "outbound": "block"
-      },
       {
         "inbound": "dns-in",
         "outbound": "dns-out"
@@ -344,50 +193,12 @@
       {
         "clash_mode": "Global",
         "outbound": "select"
-      }
-    ],
-    "rule_set": [
-      {
-        "type": "remote",
-        "tag": "geosite-ads",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-category-ads-all.srs",
-        "update_interval": "120h0m0s"
       },
       {
-        "type": "remote",
-        "tag": "geosite-malware",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-malware.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-phishing",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-phishing.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geosite-cryptominers",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geosite-cryptominers.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geoip-phishing",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-phishing.srs",
-        "update_interval": "120h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "geoip-malware",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/block/geoip-malware.srs",
-        "update_interval": "120h0m0s"
+        "domain_suffix": ".ir",
+        "geosite": "ir",
+        "geoip": "ir",
+        "outbound": "bypass"
       }
     ],
     "final": "select",
@@ -401,7 +212,7 @@
     },
     "clash_api": {
       "external_controller": "127.0.0.1:6756",
-      "secret": "J_FJEj_BtddEdYjl"
+      "secret": "YD6mK_GCmTLkgkim"
     }
   }
 }
